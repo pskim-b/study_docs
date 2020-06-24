@@ -396,3 +396,55 @@
 		. 작업 인스턴스 > 선택사항으로 스토리지를 인스턴스 그룹에 포함시키지 않고 NM 데몬 만을 포함함 
 		
 <6. EMR 사용> 
+	- 클러스터 비교 
+		. 일시적 클러스터 : 단계별로 제출 되는 작업 완료시 자동 종료 / S3로 부터 코드와 데이터 읽어옴 / 작업 종료 후 HDFS 데이터 소실 
+		---> 표준 모델, 집약적이고 반복적 ETL/처리 작업 비용 효율적 
+		. 장기 실행 클러스터 : 자동으로 종료되지 않음 / 작업을 master 노드, API 등을 통해 대화식으로 제출 / 작업 완료 후에도 HDFS 유지 
+		---> 대량 데이터를 사용할 때 주로 사용 (keep alive) / 1시간 미만의 정기적 또는 장기간 실행 작업에 효과 / HBase같은 대화식 워크로드 실행하는데 효과적 
+		
+	- 인스턴스 유형 선택 
+		. 범용 인스턴스를 master 로 사용 : core/task 워커 수에 따라서 master의 크기를 다르게함. 
+		. 1개 계정별로 20개의 노드를 제한 (클러스터 개수랑 상관 없이) 
+		. 메모리 최적화 (spark), 컴퓨팅 최적화(구문분석, 배치) , 스토리지 최적화(HBase 같이 사용량이 많은 HDFS 워크로드), GPU 인스턴스(그래픽, 배치처리)
+		. 작업수 제한 
+			> mapred.map.tasksperslot 
+			> mapred.reduce.tasksperslot
+			> mapred.map.tasks = mapred.map.tasksperslot * 맵 슬롯 수 
+			> mapred.reduce.tasks = mapred.reduce.tasksperslot * 리듀스 슬롯 수 
+	- 작업 전송 
+		. 맵/리듀스에서 전체 작업 정의 (하나의 작업으로 만듬, 일시적 클러스터에서 사용) 
+		. 장기 실행 클러스터 생성 후 emr api 로 단계적으로 제출 
+		. 에코시스템 인터페이스를 통해 쿼리 제출 
+		. 장기 클러스터 생성 후 하둡 api를 통해 작업 제출 
+		. 단계 
+			> pending > running > complete 
+			> pending > running > failed > pending 된 연속 작업들 cancelled 표시 
+	- EMR BP 
+		. S3를 영구 레코드 시스템으로 사용 -> 데이터 적재 및 결과 저장 
+		. 일시적 클러스터를 최대한 많이 사용 
+		. 클러스터 크기 조정 및 Spot 인스턴스 사용해 성능/비용을 효율적으로 관리 
+		. 새로운 인스턴스 패밀리로 성능 활용 
+		. RDS 에서 다수의 EMR 클러스터 사이에 영구적 hive 메타스토어 공유?? X 복제 
+		. Glue 데이터 카탈로그를 사용해 데이터 탐색 자동화 및 데이터 자산 구성 (EMR 에서 glue를 통해 데이터 검색, 추출) 
+		.Spark-Redshift 커넥터로 Redshift에 결과를 직접 저장할 수 있음 
+		. mapred.output.compress 결과를 압축 
+		. mapred.compress.map.output 셔플에 압축된 데이터를 전달 
+
+<7. 하둡 프로그래밍 프레임워크> 
+- Hive  : SQL 내결함성이 좋음, 배치 용도 
+	. S3 테이블, DynamoDB 테이블에서 데이터를 읽고 조인 가능 
+	. 인스턴스와 분리된 메타스토어 저장 가능 
+	. 인풋포맷이 Combine.Hive.InputFormat
+	. 로그 저장 경로가 상이함 
+	. Hive 파티션 수가 너무 많아지면 hive 성능이 떨어짐?!
+	. JSON 에 대한 파일 SerDser 제공 
+	. Glue 를 데이터 카탈로그 메타스토어로 사용가능 (영구 메타스토어)
+	. S3의 데이터를 HDFS 에 저장 하지 않고 읽을 수 있고, 결과를 DynamoDB에 넣을 수도 있다. S3 테이블/DynamoDB 테이블 조인 가능 
+- Presto : 빠른 쿼리 속도, 인메모리 SQL쿼리 엔진 
+- Pig :SQL 호환 안됨. S3에서 데이터 가져올 수 있음 
+- Spark : 빠른 쿼리 속도 
+- Flink : 데이터 스트리밍 실행 엔진. Kinesis Stream, Kafka, ES, twitter streaming api, cassandra 지원 
+
+<8. EMR 웹 인터페이스> 
+411p
+<9.EMR Spark> 
