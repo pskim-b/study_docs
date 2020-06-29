@@ -1,0 +1,263 @@
+
+*---- Security ----*
+<ES 암호화>
+- ES 에서 암호화 안되는 것 
+   . 수동 스냅샷(manual snapshot) 
+   . 슬로우 로그, 에러 로그(slow, error log) 
+- ES에서 되는 것 
+   . 자동 생성 스냅샷 
+   . ES 로그 
+   . Swap 파일 
+
+
+<Redshift Security 관리단위>
+- Group : 사용자의 모음 
+- Role : 권한의 그룹 
+- Scheme : 데이터베이스 테이블의 모음(여러 데이터페이스 가능) 
+   
+
+<DynamoDB 암호화> 
+- AWS owned CMK : dynamo가 내부 관리를 위해서 만드는 것. 사용자가 확인, 관리, 감사audit 할 수 없다. (cloud trail 에서 안보임) 
+- AWS managed CMK : KMS에서 관리되는 것으로 고객 계정에서 고객 대신 AWS 가 만드는 것으로 확인, 관리, 수동생성, 감사가 가능하다 
+
+
+<Kinesis 암호화> 
+- Client Side Encryption 을 제공하지 않는다. 
+
+
+<EMR+S3, EMRFS 암호화) 
+- EMR 제공 
+  . SSE-S3 : S3 자동관리 키 
+  . SSE-KMS : 사용자 키로 서버 암호화, 키 메타가 KMS 에 존재
+  . SSE-C : 사용자가 키를 줘서 서버에서 암호화 
+  . CSE-C : 클라이언트에서 암호화 해서 저장소에 저장, 다운로드 후 복호화 
+  . CSE-KMS : 사용자 키로 클라이언트에서 암/복호화, 키에 대한 메타정보가 KMS 에 존재 
+- S3 제공 
+  . SSE-S3
+  . SSE-KMS
+  . CSE-C
+  . CSE-KMS 
+  . SSE-C없음 
+
+<QuickSight 보안> 
+- Data set rule을 row level 로 설정할 수 있다. 
+- row-level 권한을 data set rule의 파일이나 쿼리로 적용할 수 있다. 
+- 사용자/사용자 그룹에 권한 정책 부여 
+- row-level 권한은 권한 부여 전/후에 적용 가능하다 
+- 
+
+*---- Collection ----*
+< 데이터 이관 도구> 
+- AWS DMS : RDB, DW, NoSQL 간 마이그레이션을 도와준다. onPrem, Cloud 교차 지원 가능하다 
+- Data sync : 단순 파일 단위의 데이터 복제를 수행한다. 인터넷 연결 또는 DX 연결 (S3, NFS, EFS 간 복제) 
+- Migration hub : 이관 작업의 모니터링, 관리를 위해서 사용하는 서비스 
+- Schema conversion tool (SCT) : table를 다른 엔진에 맞게 스키마를 변환해 준다. 
+
+
+<Firehose의 lambda blueprint 데이터 변환> 
+- Apache log 를 Json, CSV 로 변환 
+- syslog를 Json, CSV 로 변환 
+- Kinesis Data stream 을 소스로 보고 변환 
+- 바이너리 포맷(orc, parquet 은 지원 안함) 
+- Cloudwatch 로그에 대해서 로그 파서 역할 
+- lambda 를 통한 일반적인 데이터 변환 
+
+
+<Firehose 레코드 포맷 변환> 
+- ORC, parquet 변환 가능 
+- json 변환 
+- lambda 를 통한 일반적인 데이터 변환 
+
+
+<Kinesis Analytics Windows 쿼리 종류> 
+- 스태거stagger 윈도우 쿼리 : 불규칙한 시간의 데이터를 수집하여 쿼리 하기 위함 (VPC 플로우 로그는 10분마다 캡쳐하는데, 클라이언트는 최대 15분의 집계 값을 전달) 
+- 텀블링tumbling 윈도우 쿼리 : 중첩되지 않도록 레코드를 분할함 - GROUPBY 사용 
+- 슬라이딩sliding 윈도우 쿼리 : 고정된 개수/크기 만큼의 레코드 - 중첩 발생 - 명시적 WINDOW 문
+- 지속적 쿼리 : 집계 없이 계속해서 쿼리 하는 것 - 모니터링, 알람 
+
+<Kinesis Analytics in-application Stream> 
+- Analystic에만 존재. 
+- 테이블 같이 동작하므로 임시 쿼리 저장을 위해서는 그 개수만큼 생성 
+- pump 를 사용하여 데이터를 넣는다. 
+- DB SQL 패러다임을 따르는 모델 
+
+
+<Kinesis Data stream 레코드 종류 > 
+- KPL user record : 사용자에게 의미를 갖는 blob (json, log 정보 등)  
+- Kinesis Data Stream record : 서비스 API 에 의해 정의된 'Record' 타입의 인스턴스 // 파티션키, 시퀀스번호, 데이터blob포함 
+
+
+<AWS IoT 통신 규약> 
+- AWS IoT : X.509
+- 모바일 app : Amazon Cognito identifities (인증) 
+- 웹/데탑 app: IAM, federated entity 
+
+
+<Kinesis Firehose> 
+- 딜리버리 스트림 레코드 최대 크기 1MB 
+- 버퍼 크기 1-128MB , 버퍼 간격 60-900초 
+- GZIP, snappy, zip 데이터 압축, 디폴트 값 아님 
+
+<Kinesis Data Stream 리샤딩> 
+- 리샤딩 되면 parent 에서 child로 해쉬값이 리 라우트 된다 
+- 리샤딩 되면 parent 의 레코드는 남아 있는 상태에서 close 처리 된다. (사라지지 않고 남아 있는다) 
+- 리샤딩 되면 parent 의 기존 데이터는 api나 kcl 로 접근이 가능하다. 
+- 리샤딩 되면 prarent의 해쉬 값을 중첩 없이 나누어 분배되고 open 상태로 서비스 된다. 
+- 리샤딩 되면 parent의 데이터 retention이 모두 지나면 parent 샤드는 expired 된다. 
+- 리샤딩 후에 parent 데이터를 않읽고 child를 읽으려면 시퀀스를 명시해야 한다. 
+- 샤드 범위는 오버랩 되면 안된다. 
+
+<Kinesis 수집 특성> 
+- KPL : 수집 계층의 추상화, app 안에서 stream 으로 put 한다. 
+- AWS SDK = API : stream을 생성, 리샤딩, put/get 레코드 수행 
+- Agent : 파일 집합을 모니터링 하고 새로운 데이터를 stream에 전송한다. 
+
+<Kinesis Firehose에서 RS로 적재하는 경우> 
+- S3에 적재 후 copy 명령어를 통해 RS에 적재한다. 
+- 변환 작업 시 실패 하는 데이터는 같은 S3버킷의 processing-failed와 에러들 폴더에 생성된다. 
+- 만약 백업S3버켓이 있다면 processing-failed가 다른 버켓에 생성된다. 
+- Kinesis 에서 S3가 목적지가 되면 변환 전 데이터를 S3에 우선적으로 저장된다. = S3 backups 
+
+<Kinesis Data Stream enhanced fanout> 
+- 최대 2MB , dedicated 네트웍으로 다른 consumer 에게 영향 받지 않음 
+- stream이 push 하는 방식으로 consumer 가 polling 하는 방식이 아님 
+- 소비자는 stream에 있는 모든 샤드에서 데이터를 전달 받는다. 
+ 
+ <Kinesis Video Stream> 
+ - chunk 단위로 데이터를 저장한다 ( media meta : fragment : kinesis meta 로 구성) 
+ - HTTP live stream(HLS) -> 산업 표준, kineis 비디오를 볼 수 있다.
+ - Get media API를 통해서도 kinesis 데이터를 볼 수 있다. 
+
+*----- Processing ----*
+<IoT 서비스로 DynamoDB 적재> 
+- Device GW : 디바이스와 AWS IoT간의 통신 
+- Message broker : 디바이스와 IoT application 간의 통신 
+- Device shadow service : 디바이스의 영구적인 표현(정보) 제공 
+- Device shadow : 디바이스 현재 상태를 표현한 json 
+- Group Registry : 디바이스를 그룹으로 나눔 
+- Rule engine : epdlxj qusghksdp eogks rbclrdmf skxksoa 
+- Device registry : Device 와 resource를 연계 
+
+<Amazon Elastic transcorder>
+- S3에 저장된 미디어 파일을 재생 디바이스에 필요한 형식으로 변환 
+- Restfult 웹 서비스 / http / json 사용 
+- 구성 
+  . job : 변환 작업 수행 
+  . pipeline : 작업 대기열, 2개의 우선순위로 일반 변환 및 급속 변환 수행 
+  . preset : 형식 변환을 위한 미리 정의된 템플릿 
+  . notification : 알람 
+
+
+<Data Pipeline 에서 사용되는 DB/Datanode> 
+- DB(3)
+  . RDSDatabase, RedshiftDatabase, JdbcDatabase 
+- Datanode (5)
+  . S3Datanode, DynamoDBDatanode, SQLDatanode, RedshiftDatanode
+
+
+<Datapipeline 구성> 
+- Task : 인스턴스의 실제 작업 
+- Instance : 액션 단위, 인스턴스를 task runner 에게 준다 
+- Task runner : 작업 처리기 
+
+
+<Kinesis CloudWatch 모니터링>
+- 매분 데이터 수집(초단위 아님) 
+- 2주 데이터 보관(측정 값) 
+- stream 정보도 분 단위 수집 
+- 샤드 레벨도 분단위 수집 
+
+
+*----- Storage ----*
+<DynamoDB 보조 인덱스> 
+- Sparse Index : 칼럼 중에 sort 키가 드물게 있는 경우, 일부 칼럼만을 포함한 보조 인덱스 생성 
+- Aggregation Index : 집계 정보를 사용하여 인덱스가 필요한 경우 
+- Overloading Index : 여러 칼럼을 한번에 정렬한 인덱스를 사용하는 경우, 인덱스가 너무 많아서 하나의 인덱스에 여러 칼럼 정보를 담아야 하는 경우 
+- Sharding Index : 검색 충족 건수가 많을 때 인덱스 앞에 0-N 을 부여한 값으로 파티션 키를 생성하여 샤드를 나눈다. 
+
+<Redshift 성능 이슈 확인> 
+- STL : system table for log , 5일까지 로그를 보관함. S3로 이관하여 장기보관 가능 
+- STV : 시스템 데이터의 현재 스냅샷을 보여주는 가상 테이블 
+- System view : STL과 STV 시스템 테이블의 일부 데이터 서브셋을 가지고 있음 
+- System catalog : RS 메타 정보 가짐 
+
+<Redshift 쿼리 성능 증가>
+- Case 구문 사용하여 동일 테이블 반복쿼리 제거 
+- Select * 사용 금지, 칼럼 명 명시 
+- Cross join 사용 금지 
+- 한테이블 만 where 조건을 쓴다면 서브쿼리로 
+- where 절에서 함수 사용 금지 
+- 동일 필터라도 명시적으로 조건 쓸것 
+- group by/ order by 의 순서를 동일하게 
+- group by 에 정렬 키 사용할 것 
+
+
+<DynamoDB 성능 기법 BP> 
+- Burst Capacity : 파티션처리량을완전히사용하지않을때마다사용량급증을처리하기위한burst 예약해둠 -> 미사용 읽기/쓰기 용량 비축 
+- Adaptive Capacity : 병목 없이 hot 파티션을 읽고 쓸 수 있다. 병목 현상 제거 
+- partition key dist evenly  : 파티션 분배가 IO 요청을 균등하게 나누지는 않아 Hot partition이 생길 수 있다
+- Write sharding dist evenly  : 랜덤 넘버, 해쉬 값을 사용하여 쓰기 요청을 나눈다. hot partition을 제고할 수 있다. 
+
+<DynamoDB 요금> 
+- 온디맨드 모드 : 요청 당 요금, 초당 1000 요청 기준으로, 규모의 제약이 없다. 
+- 프로비전 모드 : 초당 사용할 수 있는 read/write를 제약, table 당 요구사항을 맞추기 위해 auto-scale 제공 
+
+<Redshift 키 분배> 
+- Key distribution : 명확히 key를 통한 join 이 많은 경우 
+- even distribution : join 없이 데이터가 조회 되는 경우 
+- all distribution : 데이터 크기가 작고 자주 조회되는 경우 
+- w/o any distribution : 워크로드 타입을 모르는 경우 - 아무거나 일단 적용 
+
+*----- Analystic ----*
+<분석 모델>
+- Regression Model 
+  . Linear regression, RMSE(root mean square error) 
+- Binary Classification
+  . Logistic regression, AUC(Area under the Curve) 
+- Multi class classification 
+  . (multinominal) logistic regression, macro average F1 
+- Cross validation 은 모두 적용 
+
+<시각화 모형>
+- Tabular Report : 테이블 레포트 , 커스터마이즈 테이블 
+- Heat Map : 두 차원의 교차를 나타냄 
+- Line chart : 시간에 따른 값의 변화를 나타냄 
+- Tree Map : 직사각형의 넓이로 계층적 데이터를 표시한다. 
+- bar chart : 단일 값, 다중 값, 클러스터, 누적, 누적 100% 사용 
+- combo chart : 두 가지 유형의 데이터를 표시하는 하나의 시각화를 만들 수 있다. (line+bar chart) 
+- donut chart, PI chart : 하나의 차원 내 항목 값을 비교 , 항목 별 비율을 보여줌 
+- KPI, gage chart : 항목의 값을 비교 (다른 치수/사용자 지정 값). 키 값과  목표 값 간의 비교를 시각화 
+
+
+<EMR notebook>
+ - Jupyter 환경의 노트북으로, S3에 데이터를 저장하고, 여러 노드에서 실행 가능하다. 
+
+<AWS 분석 도구> 
+- Amazon Coprehend : NLP 자연어 처리 도구 
+- Amazon Transcribe : voice, audio 파일을 text 로 변환해 준다. 
+- Amazon Polly : text 를 live voice 로 변환해 준다. 
+- Amazon Sagemaker : 전문가를 위한 분석 도구 
+- Amazon Rekognition : 이미지, 영상 대한 분석 
+
+<Redshift upsert> 
+- RS는 upsert 가 없다. 따라서 임시테이블에 데이터를 로드 후 load, 그리고 insert 해야 한다. 
+
+<AWS ML 모델 통찰> 
+- 예측 정확도 메트릭prediction accuracy metric: 전체 모델 성공 정도를 보여줌 
+- 시각화 : 예측 정확도 메트릭을 넘어 모델 정확도를 탐색
+- 점수 임계값 설정score threshold) : 이진 분류binary classification 만 사용가능 
+- 평과 유효성에 대한 경고 기능 제공 
+- 과적합overfitting : 특정 데이터에서만 맞는 모델, 일반화 되지 않은 모델, 교차 검증cross validation 으로 해결
+- 교차검증cross validation : 서브셋으로 여러번 모델을 검증 
+
+<QuickSight 데이터셋 삭제> 
+- 데이터셋 삭제 전에 분석 및 대쉬보드가 새로운 dataset을 가리키도록 하는 것이 좋다. 
+- 데이터셋은 고유 메타정보를 가지고 있다. 
+- 데이터셋이 삭제되어도 analysis 는 삭제되지 않는다. 
+
+<Cloud Search> 
+- 완전 관리형 검색 서비스로 대규모 집합에 대한 검색 수행 
+- 자동으로 확장하고 쉽다. 
+- App 에 대해서 검색 기능을 제공할 수 있다. (ES 는 repository 에 대한 검색) 
+
+
