@@ -234,6 +234,7 @@
 
 <AWS 분석 도구> 
 - Amazon Coprehend : NLP 자연어 처리 도구 
+- Amazon Lex : 대화형 인터페이스 구축을 위한 서비스로, 자연어이해NLU 와 음성인식ASR
 - Amazon Transcribe : voice, audio 파일을 text 로 변환해 준다. 
 - Amazon Polly : text 를 live voice 로 변환해 준다. 
 - Amazon Sagemaker : 전문가를 위한 분석 도구 
