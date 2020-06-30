@@ -54,6 +54,14 @@
 - Schema conversion tool (SCT) : table를 다른 엔진에 맞게 스키마를 변환해 준다. 
 
 
+<Kinesis firehose의 delivery stream에 전송 할 수 있는 서비스> 
+- Kinesis Data Stream 에서 Firehose stream 으로 전달 
+- AWS SDK를 통해 
+- Kinesis agent를 통해 
+- CloudWatch Logs, Events 에서 
+- AWS IoT 에서 Firehose 로 전달 
+
+
 <Firehose의 lambda blueprint 데이터 변환> 
 - Apache log 를 Json, CSV 로 변환 
 - syslog를 Json, CSV 로 변환 
@@ -167,11 +175,15 @@
 - stream 정보도 분 단위 수집 
 - 샤드 레벨도 분단위 수집 
 
+<Data Pipeline 에서 사용할 수 있는 인스턴스 유형> 
+- EC2 :  general purpose / compute optimized / memory optimized / storage optimized
+- EMR :  general purpose / compute optimized / memory optimized / storage optimized /  accelerated computing 
+
 
 *----- Storage ----*
 <DynamoDB 보조 인덱스> 
-- Sparse Index : 칼럼 중에 sort 키가 드물게 있는 경우, 일부 칼럼만을 포함한 보조 인덱스 생성 
-- Aggregation Index : 집계 정보를 사용하여 인덱스가 필요한 경우 
+- Sparse Index : 인덱스 정렬키값이 있는 경우에만 인덱스를 작성 // 칼럼 중에 sort 키가 드물게 있는 경우, 일부 칼럼만을 포함한 보조 인덱스 생성 
+- Aggregation Index : 전체 데이터에 대하여 실시간 집계 // 집계 정보를 사용하여 인덱스가 필요한 경우 
 - Overloading Index : 여러 칼럼을 한번에 정렬한 인덱스를 사용하는 경우, 인덱스가 너무 많아서 하나의 인덱스에 여러 칼럼 정보를 담아야 하는 경우 
 - Sharding Index : 검색 충족 건수가 많을 때 인덱스 앞에 0-N 을 부여한 값으로 파티션 키를 생성하여 샤드를 나눈다. 
 
@@ -208,6 +220,29 @@
 - all distribution : 데이터 크기가 작고 자주 조회되는 경우 
 - w/o any distribution : 워크로드 타입을 모르는 경우 - 아무거나 일단 적용 
 
+<DynamoDB 모니터링> 
+- CloudWatch alarm , logs , event
+- CloudTrail log monitoring by CloudWatch 
+- DynamoDB dashboard 
+- Manual Monitoring 
+
+<Storage Gateway> 
+- on-prem SW 어플라이언스를 cloud 스토리지에 연결하여 보안성을 확보하고 on-prem 환경과 cloud 스토리지 인프라 사이의 통합함 
+- File Gateway 
+   . on-prem 장비> S3에 대한 인터페이스 지원하여 가상의 SW 어플라이언스를 연결 
+   . NFS, SMB 프로토콜로 S3 객체를 접근
+- Volume Gateway 
+   . on-prem 서버에서 iSCSI 장치로 탑재할 수 있도록 볼륨 제공(캐싱/저장 볼륨) 
+   . VMware ESXi, KVM 또는 Hyper-V로 실행되는 VM으로 on-prem 에 배포 
+   . 캐쉬/핫 데이터 영역으로 사용 
+   . Cached Volume : Cloud Storage에 저장하되 캐쉬 데이터는 로컬에 저장 
+   . Stored Volume : 일단 로컬에 저장하고 일정 기간이 지나면 Cloud storage로 전달
+ - Tape Gateway 
+   . cloud 기반 가상 tape 스토리지 제공 
+   . VMware ESXi, KVM 또는 Hyper-V로 실행되는 VM으로 on-prem 에 배포 
+   . 백업 데이터 비용/내구성이 좋아 Galcier/Deep Archive 로 보관 
+
+
 *----- Analystic ----*
 <분석 모델>
 - Regression Model 
@@ -227,7 +262,7 @@
 - combo chart : 두 가지 유형의 데이터를 표시하는 하나의 시각화를 만들 수 있다. (line+bar chart) 
 - donut chart, PI chart : 하나의 차원 내 항목 값을 비교 , 항목 별 비율을 보여줌 
 - KPI, gage chart : 항목의 값을 비교 (다른 치수/사용자 지정 값). 키 값과  목표 값 간의 비교를 시각화 
-
+- Scatter plot : 산점도를 사용하여 2,3개 치수를 시각화함. bubble은 하나의 항목을 나타내고 bubble은 차원의 한 항목에 대한 2개의 값이 교차하는 지점에 나타난다. 
 
 <EMR notebook>
  - Jupyter 환경의 노트북으로, S3에 데이터를 저장하고, 여러 노드에서 실행 가능하다. 
@@ -261,4 +296,19 @@
 - 자동으로 확장하고 쉽다. 
 - App 에 대해서 검색 기능을 제공할 수 있다. (ES 는 repository 에 대한 검색) 
 
-
+<QuickSight 원본 데이터 연계> 
+- 안되는 것들 = RDB 스키마 형태가 아닌 것들 
+  . Apache Neptune
+  . Amazon DynamoDB 
+  . Amazon ElasticSearch 
+- 연계 되는 것들
+  . Aurora / RDS (MySQL5.1, MSSQL2012, MariaDB10 이상)
+  . Redshift / Redshift Spectrum 
+  . S3 / S3 Analytics
+  . XLSX, ELF, CLF, CSV, TSV in S3 
+  . Spark 2.0 이상 
+  . Presto 0.167 이상 
+  . PostgreSQL 9.3.1 이상 
+  . Teradata 14.0 이상 
+  
+  
