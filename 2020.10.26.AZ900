@@ -1,0 +1,205 @@
+(1)
+클라우드 이점 
+- 고가용성, HA
+- 대량의 가용성 = 규모의 경제 활용 가능 
+- 재해복구, DR 
+- 내결함성 = 결함에 따른 복구성, fault-tolerance 
+- 확장성, Scale-out (장기적) 
+- 탄력성, Scale-out/in (일시적)
+- 유연한 예산 운용 
+- 민첩성 
+- 글로벌 분산,  
+- 보안성, 보안 서비스 제공  
+
+자본지출 CapEx (Capital Expenditure) 
+운영지출 OpEx (Operational Expenditure) 
+= 소비기반 모델(종량제) 
+
+(2)
+IaaS = HW ( OS + Platform + App + Data 직접 관리) = 인프라 제공 
+- 제공된 HW를 활용 
+- OS, 플랫폼 패치를 직접해야함(java 버전 업 등) 
+
+PaaS = HW + OS + Platform ( App + Data 직접 관리) = 개발 중심 
+- App을 구축, 테스트, 배포할 수 있는 환경을 제공 
+- OS에 접근할 수 없고 제공한 플랫폼에서 서비스를 개발함 
+
+SaaS = HW + OS + Platform + APP  (Data 직접 관리) = 사용자 중심 
+- 응용프로그램 자체를 제공 (ex. MS365, Office365)
+- 데이터와 접근 관리만 제공 
+
+HW (=NW/Storage/CPU/Memory + 물리보안)
+
+
+(3)
+Public Cloud 
+- CSP가 소유하여 서비스를 제공함
+- 다수의 사용자에게 리소스와 서비스 제공
+- 보안된 네트워크(인터넷)을 통해 접근가능
+
+Private Cloud 
+- 클라우드 리소스를 조직에서 소유/관리 
+
+Hybrid Cloud 
+- 유연함 
+- Pulbic+Private 
+- 사내 데이터센터를 공용 클라우드로 확장  (CapEx + OpEx) 
+- VPN 또는 전용선으로 연결 
+- 통합관리를 위한 도구 필요 
+
+* MS는 Hybrid Cloud를 지향한다 
+- 인증 : Azure AD ~ MS AD 
+- 데이터 : Azure Data Services ~ SQL Server 
+- 통합개발 : Azure Serivces ~ Azure Statck(Onprem에서 API 동일하게 제공) 
+- 보안/관리 : Azure Security&Management ~ On-premises Infra 
+
+(1~3 정리) 
+
+(4) - 아키텍처 구성요소 
+Region 
+- 하나 이상의 데이터센터 (데이터센터 = zone) 
+- 가장 가까운 지역에 리소스를 배포 
+- 리전 별 제공하는 서비스 있음 
+
+BCDR(Business Continuity and Disaster Recovery) 
+- 리전은 항상 쌍을 이루고 있음 
+- 일부 서비스의 경우 지역 상에 자동 복제를 제공한다. 
+
+Geography 
+- 데이터 상주 및 규정 준수 경계를 유지하는 개별 시장 (아메리카, 유럽, 아시아 태평양..) 
+- 둘 이상의 영역(Zone)을 포함한다.  
+
+가용성 옵션 
+- 단일VM, 하나의 VM = 99.9%
+- Availability Set, 데이터 센터 내  = 99.95% 
+    . 유지관리/HW오류에 대해서 가용성을 보장 
+	. UD(Update Domain) = 다른 인스턴스 = 유지관리를 할 수 있다. 
+	. FD(Fault Domain) = 다른 하드웨어 = HW 장애에 대해서 자유롭다 
+	. Azure에서 알아서 배포, 내부 통신 비용 X 
+- Availability Zone, 데이터  센터 간 = 99.99% 
+    . AV-set을 여러 데이터센터에 제공 
+	. 독립적인 전원, 냉각, 네트워크 제공하는 하나 이상의 데이터센터 포함 
+	. 한 AZ가 죽으면 다른 AZ로 서비스
+	. HA를 구성하는 것은 사용자의 몫이다. 
+	. 사용자가 선택해서 배포, AZ간 통신 비용 발생 
+- Region Pair(multi region, DR) = 99.9999...%
+	. Region 간 복제 가능 
+	. Traffic Manager / Site Recovery 를 통해서 복제 및 트래픽 관리 
+	
+리소스 그룹 
+- 동일한 수명 주기를 갖는 리소스를 묶음 
+	ex1. web~app~db 
+	ex2. web / app / db 
+- 리소스는 리소스 그룹을 이동함 
+- 리소스는 하나의 리소스 그룹을 가짐 
+- 역할기반 접근제어(RBAC)를 통해 사용자 리소스그룹 레벨 보안 유지 
+
+Azure Resource Manager 
+- Azure를 관리하는 계층 
+- 리소스/리소스 그룹 생성,관리,삭제 
+- Azure AD를 통한 접근제어 
+- Azure Portal, CLI, PowerShell, API 제공 
+
+
+(5) Azure compute 서비스
+
+Azure Virtual Machine (IaaS) - 워크로드 처리에 가장 유연한 서비스 
+VM Scale Sets - Azure VM image를 이용해 자동 확장/축소 
+App Services (PaaS) - 소스파일 업로드 하면 동작하는 서비스들 (Web/API/Mobile/Logic App) 존재 
+Functions - 이벤트 기반의 App service (서버리스) 
+
+Azure Container 서비스 
+Azure Container Instance - Container Cluster에  Cotainer Image 를 업로드할 수 있는 PasS  
+Azure Kubenetes Service - Azure VM에 K8s Cluster를 구성해주며, Master Node는 무료로 제공 
+
+(6) Azure Network 서비스 
+- SDN(software defined network) 기반으로 동작 
+- 사설 네트워크를 만들고 조작할 수 있는 서비스 
+- 가상 네트워크가 필요한 모든 리소스 구성 가능 
+-  부하분산 / onprem 연결 등 
+
+Azure Virtual Network - 논리적인 private network 제공 
+Azure Load Balancer - L4레벨의 트래픽 분산 및 고가용성 제공 
+VPN Gateway - Onprem to azure, azure to azure 연결 
+Application Gateway - app 에 대한 traffic 분산 (L7레벨 웹 서비스에 대한 부하분산 및 고가용성 제공) 
+Azure CDN - 사용자에게 가장 가까운 POP에 정적 콘텐츠 캐싱하여 웹 컨텐츠를 효율적으로 전달하는 분산 서비스 
+
+
+(7) Azure Storage 서비스 
+Storage Account - 데이터를 저장하고 관리할 수 있는 서비스 / Blob(container), file, queue, table로 이루어짐 / 
+				- blob은 비정형 데이터를 저장할 수 있는 Object Storage 
+				- File은 SMB 3.0 을 사용해 가상머신에 mount 가능 
+				- blob은 가상 머신 disk 파일도 저장 가능 (unmanaged disk) 
+				
+데이터 범주 
+- 정형 : 동일한 데이터 필드/속성을 가진 스키마 준수 
+- 반정형 : json / html 
+- 비정형 : 지정된 스키마 또는 데이터 구조가 없음 
+
+Storage 서비스 
+- Azure Blob : 비정형 데이터 저장하는 스토리지. Rest 지원 
+- Azure File :  SMB(server message block) 및 REST 지원 / VM에 mount 가능 
+- Azure Queue : 메세지 저장/검색 
+- Azure Table : key-value NoSQL 스토리지, 동적 스케일링 지원 
+
+(8) Azure Database 서비스 
+- PaaS / 기본적으로 고가용성 제공 /기존 DB관리 툴을 이용해서 DB 관리 가능 
+
+Azure SQL Server 
+Azure Database for MySQL 
+Azure Database for PostgreSQL 
+- 각 엔진은 Database as a service DaaS라고 함 
+- Orcle은 DB 엔진으로 제공 안함 
+
+Azure Cosmos DB 
+- 처리량과 스토리지를 탄력적이고 독립적으로 확장할 수 있는 NoSQL 관리형 서비스 / 글로벌 분산 가능 
+
+Azure Database Migration 
+- 다운타임을 최소화 하면서 마이그레이션 하기 위한 도구 
+- 데이터 마이그레이션 도구라서, 스키마 작업을 별도로 작업해야 한다. 
+- 완전 관리형 서비스 
+
+(9) Azure IoT 서비스 
+Azure IoT Central - IoT 리소스를 대규모로 쉽게 연결/관리/제어 할 수 있는 IoT SaaS
+Azure IoT Hub - IoT 응용과 IoT 디바이스간 양방향 통신을 위한 허브. 완전관리 서비스 
+Azure IoT Device - 디바이스 테스트를 위한 서비스 , IoT 프로그램 데모를 위함 
+
+(10) Azure Bigdata와 ML서비스 
+Azure SQL DataWarehouse - 복잡한 쿼리를 수행할 수 있는 DW 관리형 서비스 
+Azure HDInsight - Hadoop 기반 완전관리형 분석 서비스 
+Azure Data Lake Analytics - 
+Azure Databricks - Spark 기반의 AI 모델 개발 
+Azure ML Serivce - ML 모델을 개발, 트레이닝, 테스트 배포, 관리, 추적 
+Azure ML Studio - 코드작성 없이 ML 솔루션 구축하고 테스트 및 배포 수행 / Drag&Drop 
+
+(11) Serverless 서비스 - 실행횟수, CPU/Memory 기반으로 과금함 
+Azure Functions - FaaS 서비스. 소스 코드를 바로 실행. 이벤트 기반 동작 
+Azure Logic App - 앱, 데이터, 시스템, 서비스를 통합하여 작업/비즈니스 프로세스, 워크플로우 자동화 서비스 
+Azure Event Grid - 균일한 이벤트 소비스 소비를 위해 pub/sub 모델을 사용하는 완전관리형 이벤트 라우팅 서비스 
+
+App Service Plan 
+- WebApp/APIApp/MobileApp/LogicApp/Functions이 실행되기 위해 생성되는 리소스 
+- 여러개의 서비스를 올릴 수 있지만 리소스에 제한이 있다. 더 높은 리소스를 위해 확장이 필요하다. 
+- 실제 과금 단위 
+	> App Service Plan(Windows) - Windows IIS 기반 / 용량단위구매로 최대 10대까지 확장 
+	> App Service Plan(Linux) - Linux 기반, 용량단위구매로 최대 10대까지 확장
+	> Consumption Plan - Win/Linux 기반으로 사용한 만큼 지불하는 plan 
+
+Web App (PaaS) 
+- code/container 업로드를 통해 운영 가능 
+- slot을 만들어서 swap할 수 있어 devops 제공 
+
+
+
+-----------------------------
+• Microsoft Learn: https://docs.microsoft.com/ko-kr/learn/?ocid=AID3001216
+• Azure 기본 과정 온라인 https://docs.microsoft.com/ko-kr/learn/paths/azure-fundamentals/
+• Azure 기본 과정 랩 http://github.com/MicrosoftLearningKoreanLab/AZ-900TKR-MicrosoftAzureFundamentals/
+• AZ-900 자격증 시험관련 안내 https://www.microsoft.com/ko-kr/learning/certification-exam-policies.aspx
+• AZ-900 실습 참고 페이지: https://github.com/MicrosoftLearningKoreanLab/AZ-900TKR-MicrosoftAzureFundamentals
+• 온라인 과정 : https://aka.ms/azfund
+• Lab주소
+> https://github.com/MicrosoftLearningKoreanLab
+> https://github.com/MicrosoftLearning
+• 시험 덤프 : https://www.examtopics.com/exams/microsoft/az-900/view/
+• 시험 후기 : https://m.blog.naver.com/yyk_1002/221985222532
