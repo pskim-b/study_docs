@@ -1,32 +1,41 @@
 (1)
-클라우드 이점 
-- 고가용성, HA
+* 클라우드 이점 
+- 고가용성, High Availability  --> down time 없게 하는 것 
 - 대량의 가용성 = 규모의 경제 활용 가능 
 - 재해복구, DR 
-- 내결함성 = 결함에 따른 복구성, fault-tolerance 
-- 확장성, Scale-out (장기적) 
-- 탄력성, Scale-out/in (일시적)
-- 유연한 예산 운용 
-- 민첩성 
-- 글로벌 분산,  
-- 보안성, 보안 서비스 제공  
+- 내결함성Fault-Tolerance,결함에 따른 복구성, --> 시간이 오래 걸릴 수 있지만 복구는 됨  
+- 확장성Scalability, Scale-out (장기적) 
+- 탄력성Elasticity, Scale-out/in (일시적)
+- 유연한 예산 운용, predictive cost considerations(예측할 수 있는 비용 고려) 
+- 민첩성Agility 
+- 글로벌 분산Global Reach,  
+- 보안성Security, 보안 서비스 제공  
+- Ondemand self service 
 
-자본지출 CapEx (Capital Expenditure) 
-운영지출 OpEx (Operational Expenditure) 
+* Azure Expenditure model 
+- 자본지출 CapEx (Capital Expenditure)   = upfront, dedeuction cloud model
+- 운영지출 OpEx (Operational Expenditure)  
 = 소비기반 모델(종량제) 
 
-(2)
-IaaS = HW ( OS + Platform + App + Data 직접 관리) = 인프라 제공 
-- 제공된 HW를 활용 
-- OS, 플랫폼 패치를 직접해야함(java 버전 업 등) 
+* Cloud Model 
+- Private model ---> owner ship model 
+- Public model ---> shared responsibility (공동의 책임 고려 필요), network connection  
+- Hybrid Model = flexibility model 
 
-PaaS = HW + OS + Platform ( App + Data 직접 관리) = 개발 중심 
-- App을 구축, 테스트, 배포할 수 있는 환경을 제공 
-- OS에 접근할 수 없고 제공한 플랫폼에서 서비스를 개발함 
-
-SaaS = HW + OS + Platform + APP  (Data 직접 관리) = 사용자 중심 
-- 응용프로그램 자체를 제공 (ex. MS365, Office365)
-- 데이터와 접근 관리만 제공 
+* 서비스 타입 
+- IaaS = HW ( OS + Platform + App + Data 직접 관리) = 인프라 제공 
+	. 제공된 HW를 활용 (HW 교체, 물리서버 보안 제공) 
+	. OS, 플랫폼 패치를 직접해야함(java 버전 업 등) 
+	. biggest user responsibility 
+	
+- PaaS = HW + OS + Platform ( App + Data 직접 관리) = 개발 중심 
+	. App을 구축, 테스트, 배포할 수 있는 환경을 제공 
+	. OS에 접근할 수 없고 제공한 플랫폼에서 서비스를 개발함 
+	. Infra worry X  
+	
+- SaaS = HW + OS + Platform + APP  (Data 직접 관리) = 사용자 중심 
+	. 응용프로그램 자체를 제공 (ex. MS365, Office365)
+	. 데이터와 접근 관리만 제공 
 
 HW (=NW/Storage/CPU/Memory + 물리보안)
 
@@ -486,13 +495,6 @@ Subscription 종료
 
 (단원정리) 
 
- 
-
-
-
-
-
-
 -----------------------------
 • Microsoft Learn: https://docs.microsoft.com/ko-kr/learn/?ocid=AID3001216
 • Azure 기본 과정 온라인 https://docs.microsoft.com/ko-kr/learn/paths/azure-fundamentals/
@@ -505,20 +507,69 @@ Subscription 종료
 > https://github.com/MicrosoftLearning
 • 시험 덤프 : https://www.examtopics.com/exams/microsoft/az-900/view/
 • 시험 후기 : https://m.blog.naver.com/yyk_1002/221985222532
-
+https://blog.naver.com/deet1107/221889950754
+https://k21academy.com/microsoft-azure/az-900/az-900-microsoft-azure-certification-fundamental-exam-everything-you-must-know/
 ---------------
 덤프분석 
 
-- PaaS는 OS에 대한 완전한 제어권을 주지 않는다. (provicdes full control -- X) 
+1)
+- PaaS는 OS에 대한 완전한 제어권을  준다 (provicdes full control -- X) 
 - PaaS는 플랫폼의 자동적인 scale 기능을 제공한다 (O) 
 - PaaS는 전문적인 개발 서비스 및 지속적인 기능추가를 제공한다... CI/CD 가능 (O) 
+2) 
 - Azure는 CapEx와 OpEx 사이의 유연성을 제공한다 -- O
 - 만약 두 개의 Azure VM이 같은 B2S사양이라면 월 청구가격은 항상 같다 -- X
 - Azure VM이 중지되어 있을때 VM과 관련된 스토리지 비용은 지속적으로 발생한다 -- O 
-- SaaS 서비스를 구현할때 사용자가 해야하는 작업은 무엇인가 -- configuring the SaaS Solution 
-- Onprem to Azure 마이그레이션 할 때 만약에 Azure 데이터센터가 내려가도 서비스될 수 있도록 하는 특성은 무엇인가 -- fault tolerance 
-- Azure에서 성공적으로 실행되는 데 필요한 몇가지 사용자 지정이 있는 기존 응용프로그램을 배포해야 한다. 어떠한 서비스를 사용해야 하는가 ---> Azure VM , OS레벨 사용자 변경이 가능함으로 
-- "Azure 정책에서" 클라우드 인프라에 개체를 배포하고 Azure 환경에서 일관성을 구현하기 위한 공통 플랫폼을 제공합니다 ---> "Azure 리소스 매니져로" 변경 
+3) SaaS 서비스를 구현할때 사용자가 해야하는 작업은 무엇인가? -- configuring the SaaS Solution (스케일 정의, SW 설치 필요 없음)  
+4)  Onprem to Azure 마이그레이션 할 때 만약에 Azure 데이터센터가 offline이 되어도 일부 서버들이 사용가능하도록 하는 특성은 무엇인가? --> fault tolerance 
+5) "private cloud"에서 인프라를 구성한 조직은 그들의 데이터 센터와 연결을 끊을 수 있다. ---> "public cloud"로 변경 
+6) public cloud의 특성으로 올바른 것 2개를 골라라 ---> metered pricing, self-service management 
+7) 공개public 웹 페이지를 azure로 마이그레이션 할때 반드시 "월 단위 사용료"에 대해 계획해야 한다    --->  "변경 필요 없음, 인바운드 비용 없음"  
+8) 너희 회사는 데이터 센터를 Azure로 이관하려 한다. 회사의 이관 계획은 오직 Azure의 PaaS만 쓰는 것이다. 따라서 planned migration을 지원하는 환경에 배포해야 한다.  솔루션 App Service/Azure SQL database 가 해당 요구사항을 만족하나?  ----> yes (모두 PaaS) 
+9) 너희 회사는 데이터 센터를 Azure로 이관하려 한다. 회사의 이관 계획은 오직 Azure의 PaaS만 쓰는 것이다. App Serivce / Azure VM에 설치해야 한다 ---> AZVM은 IaaS 
+10) 너희 회사는 데이터 센터를 Azure로 이관하려 한다. 회사의 이관 계획은 오직 Azure의 PaaS만 쓰는 것이다. App Service와 Storage account 에 배포되어야 한다. ---> Storage account는 IaaS임 
+11) 너희 회사는 모든 고객이 사용하는 App1이라는 앱이 있는데, 한 달의 첫 3주는 사용량이 낮고 마지막 주는 사용량이 높다. Cloud Serivce는 어떤 방식의 비용 관리 패턴을 제시하나 ---> elasticity (늘고 줄어듬) 
+12)관리 비용을 최소화 하여 웹 어플리케이션을 배포 사용하고 싶다. 어떠한 방법을 권장할까? --->  PaaS 
+13) Azure VM 은 "IaaS" 이다 , Azure SQL database는 "PaaS" 이다. 
+14) on-premise에 100대의 서버가 존재한다. 그리고 추가적인 리소스를 사용자에게 제공하려고 한다. capex, opex를 최소화 하는 방법은 무엇인가?  ----> 덤프 답 : private cloud / 나의 생각 hybrid cloud 
+15) 
+- hybrid cloud 모델 달성을 위해 회사는 반드시 private cloud 로 부터 마이그레이션 해야 한다 ---> X
+- 회사는 내무 네트워크 사용량을 public cloud를 통해서 확장 할 수 있다. ---> O (hybrid model을 통해 네트워크 적으로 확장 될 수 있다고 봐야 한다) 
+- public cloud 모델에서 오직 게스트 사용자들만 cloud의 리소스에 접근 할 수 있다 ---> X  
+16) 서버들을 위해 public cloud service 를 사용하는 주요 이점이 뭐냐? ---> 공유된 객체들을 여러 회사들이 리소스들의 부분을 사용할 수 있다. 
+17) 몇몇의 Azure VM을 배포하려 한다. 하나의 DC가 offline되어도 기동할 수 있도록 하고 싶다. 그러면 하나 이상의 scale set 에 구성하면 된다 ----> X, multiple available zone에 배포해야 한다. 
+18) Azure VM을 배포하려 한다. 하나의 DC가 offline되어도 수행될 수 있도록 해야 한다. 그렇다면 두개 이상의 availability zones 에 배포해야 한다. ---> O 
+19) Azure VM을 배포하려 한다. 하나의 DC가 offline 되어도 수행될 수 있도록 해야 한다. 그렇다면 하나 이상의 리전에  배포를 해야 한다. ----> X, 가능하지만 권장되는 사항이 아니다!! 최적의 선택이 아니다. 
+20) 너희 회사는 DC내에 1000개의 VM을 hyper-V 호스트 위해서 수행한다. 그리고 모든 VM을 Azure pay-as-you-go-subscription 으로 이관하려 한다. 어떤 비용 모델을 쓸 것인지 결정해야 한다. 무엇을 쓸까? ---> operational(OpEX) // expenditure model 은 OpEx, CapEx 이야기 
+21) 
+- 클라우드 서비스는 "Fault tolernace" 발생 후에도 사용 가능함  .... 문제 말이 좀 이상함 
+- 클라우드 서비스는 빠르게 "DR" 복구 가능 
+- 클라우드 ㅅ비스는 빠르게 "dynamic scaleability" 증가할 수 있음 
+- 클라우드 서비스는 빠르게 "low latency" 인터넷에 접근 가능함 
+
+22)
+- hybrid cloud model 구현을 위해 회사는 반드시 private cloud 모델로부터 마이그레이션 해야 한다 ---> X 
+- 기업은 public cloud 를 사용함으로써 내부 네트워크 연산 리소스를 확장할 수 있다 ---> O 
+- public cloud model 에서 오직 guest 사용자만 클라우드 리소스에 접근 가능 하다 ---> X 
+
+23) 
+- Azure 리소스는 오직 같은 그룹의 리소스에만 접근 가능 하다 ---> X 
+- 리소스 그룹을 삭제하면, 리소스 그룹 안의 모든 리소스가 삭제 된다 ---> O 
+- 리소스 그룹은 여러 리전들의 리소스들을 포함할 수 있다 ---> O 
+
+24) 기업은 on-prem 에서 여러 서버를 포함하는 네트워크를 운영중이다. 그리고 관리 책임들을 줄이려고 한다. (app 데이터 백업, 서버hw 교체, 물리 서버 보안, 서버 OS 어벧이트, 공유 문서 권한 관리). 기업은 몇몇 서버를 Azure VM으로 이관하려 한다. 이관 후에 줄어들 관리 요소들을 식별해야 한다. 무엇인가?  --> 물리서버 보안, 서버HW교체  (IaaS 특성) 
+
+https://www.examtopics.com/exams/microsoft/az-900/view/7/
+
+
+
+
+
+
+
+
+7) Azure에서 성공적으로 실행되는 데 필요한 몇가지 사용자 지정이 있는 기존 응용프로그램을 배포해야 한다. 어떠한 서비스를 사용해야 하는가 ---> Azure VM , OS레벨 사용자 변경이 가능함으로 
+ - "Azure policy에서" 클라우드 인프라에 개체를 배포하고 Azure 환경에서 일관성을 구현하기 위한 공통 플랫폼을 제공합니다 ---> "Azure Resource Manager" 변경 
 - 개발팀이 매주 50개의 사용자 지정 가상머신 배포 한 후 제거할 계획, 30대는 Windows, 20대는 Linux 실행. 배포 및 제거하는데 필요한 에포트 최소화 하는 Azure 서비스는? ---> Azure DevTest Labs, 대규모 테스트 자원 관리 가능.. 비용 효율적임   
 - 여러 Azure 가상 컴퓨터에 동시에 사용 권한을 위임해야 하는 경우 Azure 가상 컴퓨터를 "동일한 Azure 리전"에 배포해야 한다 ---> "동일한 리소스 그룹" , 리소스그룹 단위로 역할 그룹 설정
 - 회사는 서버를 azure로 자동 배포할 계획임. 관리자는 배포 중 자격증명을 노출할 수 있다는 것을 염려하여 배포 중에 관리 자격 증명을 암호화 하는 azure 솔루션은? ---> Azure key vault 
@@ -531,5 +582,4 @@ Subscription 종료
 - MS가 정의한 가장 높은 SLA는 무엇인가? ---> 원래 99.99% , 99.999% 갱신됨.. 
 - Azure 서비스는 "공개 미리보기" 상태일 때 모든 Azure 고객이 사용할 수 있다 --> 변경 X 
 - Azure 비용 관리를 사용할 수 없는 것은? --> 	Software Assurance , 이거는 제품 구매 후 확약서 // 개발,테스트 구독/기업계약/종량제 구독 
-
 
