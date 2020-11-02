@@ -693,8 +693,237 @@ https://k21academy.com/microsoft-azure/az-900/az-900-microsoft-azure-certificati
 - Browse available virtual machine image -> market place 
 - view security recommendation -> Advisor 
 
+61) Android 랩탑에서 Azure VM을 생성하고 싶다. Azure cloud shell에서 배쉬를 통해 수행 가능하다. -- yes 
 
-https://www.examtopics.com/exams/microsoft/az-900/view/16/
+62) 애져 VM을 생성하고자 한다. VM의 스토리지로 사용하기 위해서 어떤 스토리지 서비스를 사용해야 하는가?  --> File Storage 
+
+63) 너의 회사는 몇몇의 서버를 애져로 이관하려 한다. 회사의 컴플라이언스 정책은 FinServer 라는 서버는 별도 네트워크에 존재해야 한다. 어떻게 이러한 정책을 충족시킬 것인가? --> a virtual network for FinServer and another virtual network for all the other servers
+ 
+64) 네트워크 드라이브를 몇몇의 컴퓨터에 애져 스토리지로 맵핑하려 한다. 계획되고, 맵핑된 드라이브 스토리지 솔루션은 무엇인가?   --> a File service in a storage account 
+
+65) 여러 리젼에서 데이터를 동시에 추가할 수 있어야 한다. JSON 형태의 문서를 저장할 수 있어야 한다. 어떠한 형태의 database 서비스가 사용되어야 하는가? -->Explanation => CosmosDB  / globally  , datalake 는 regional 서비스다 
+
+66) 너의 회사는 모든 네트워크 리소스를 애져로 이관하려 한다. 무엇을 반드시 제일 먼저 만들어야 하는가? 
+--> subscription, (management group은 옵션) 
+
+67) 너는 on-prem 앱을 가지고 있는데 그것은 특정 룰에 의해서 이메일 알람을 보내준다. 이것을 애져로 이관하려 할때 서버리스 컴퓨팅 솔루션을 사용하려고 한다. 무엇이 권고되는가??  --> a logic app 
+
+68) 웹사이트를 애져로 이관하려 한다. 웹사이트는 전세계 사용자에 의해서 접근될 수 있어야 하고, 큰 비디오파일을 가지고 있어야 한다. 사용자들에게 최고의 비디오 재생 경험을 제공하고 싶다. 어떤 서비스를 써야 하는가? ---> CDN 
+
+69) 너의 회사는 몇백만 센서를 배포하고 데이터를 애져로 업로드하려 한다. 어떠한 서비스가 권장되는가 2개 골라라 ---> Azure IoT Hub, Azure Queue Storage  
+
+70) 너는 웹앱을 가지고 있다. 이 웹앱의 설정을 아이폰에서 설정하고 싶다. 아이폰에서 사용할 수 있는 두가지 도구는 무엇인가? ---> Azure Cloud shell, Azure portal 
+
+71) You have an application that is comprised of an Azure web app that has a Service Level Agreement (SLA) of 99.95 percent and an Azure SQL database that has an SLA of 99.99 percent. The composite SLA for the application is the "product of both SLAs, which equals 99.94 percent".   ---> no changed
+
+72) If a resource group named RG1 has a delete lock, "only a member of the global administrators group" can delete RG1 ----> B. the delete lock must be removed before an administrator
+
+73) Azure Germany can be used by "legal residents of Germany only."   ---> D. any user or enterprise that requires its data to reside in Germany
+
+74) After you create a virtual machine, you need to modify the "network security group (NSG)" to allow connections from TCP port 8080 to the virtual machine.  ---> A. No change is needed
+
+75) Your Azure environment contains multiple Azure virtual machines.
+You need to ensure that a virtual machine named VM1 is accessible from the Internet over HTTP.
+Solution: You modify a DDoS protection plan.   ----> no, firewall 
+
+76) You need to ensure that a virtual machine named VM1 is accessible from the Internet over HTTP.
+Solution: You modify an Azure firewall.  ----> yes 
+
+77) Your Azure environment contains multiple Azure virtual machines.
+You need to ensure that a virtual machine named VM1 is accessible from the Internet over HTTP.
+Solution: You modify an Azure Traffic Manager profile.  ---> no 
+
+78) Which two types of customers are eligible to use Azure Government to develop a cloud solution? Each correct answer presents a complete solution.   ---> C. a United States government entity, D. a United States government contractor // 미 정부만을 위한 것 US gov cloud 
+
+79) 
+- To implement an Azure Multi-Factor Authentication(MFA) solution, you must deploy a federation solution or sync on-premises identities to the cloud-->NO, 
+- Two valid methods for Azure Multi-Factor Authentication (MFA) are picture identification and a passport number-->NO
+- Azure Multi-Factor Authentication (MFA) can be required for administrative and non-administrative user accounts--> YES
+
+80) You need to ensure that when Azure Active Directory (Azure AD) users connect to Azure AD from the Internet by using an anonymous IP address, the users are prompted automatically to change their password. Which Azure service should you use?    ---> D. Azure AD Identity Protection
+
+81) 
+- Identify and deliver electronic information that can be used as evidence in legal cases - eDiscovery
+- Control how a Microsoft support engineer accesses your data during a help session - Customer Lockbox
+- Extend an existing telephone system for call delegation and call on-behalf functionality - PSTN Calling
+- Provide statistics that help you understand how you spend your time at work - MyAnalitics
+
+82) Your company plans to deploy several web servers and several database servers to Azure.
+You need to recommend an Azure solution to limit the types of connections from the web servers to the database servers. What should you include in the recommendation? ---> A. network security groups (NSGs)
+
+83) To what should an application connect to retrieve security tokens?  ---> Azure AD 
+84) "Resource groups provide" organizations with the ability to manage the compliance of Azure resources across multiple subscriptions.    ---> "Azure Policies" 
+
+85) Your network contains an Active Directory forest. The forest contains 5,000 user accounts.
+Your company plans to migrate all network resources to Azure and to decommission the on-premises data center. You need to recommend a solution to minimize the impact on users after the planned migration. What should you recommend? ---> B. Sync all the Active Directory user accounts to Azure Active Directory (Azure AD)
+
+86) You create a resource group named RG1 in Azure Resource Manager.
+You need to prevent the deletion of the resources in RG1. ---> delete lock 
+
+87) Which Azure service should you use to store certificates? ---> key vault 
+
+88) You have a resource group named RG1.
+You plan to create virtual networks and app services in RG1.
+You need to prevent the creation of virtual machines only in RG1.
+What should you use?  ---> azure policy 
+
+89) What can Azure Information Protection encrypt? ---> B. documents and email messages
+
+90) What should you use to evaluate whether your company's Azure environment meets regulatory requirements? ----> D. the Security Center blade from the Azure portal
+
+91) 
+- Azure advisor can generage a list of azure virtual machines that are protected by azure backup  --> no 
+- if you implement the security recommendations provided by azure advisor, your company's secure score will decrese --> no 
+- to maintain ms support, ou must implement the security recommendations provided by azure advisor with in a period of 30 days  --> no 
+
+92) Your company implements "Azure policies" to automatically add a watermark to Microsoft Word documents that contain credit card information. --> Azure information protection 
+
+93) From "Azure Monitor", you can view which user turned off a specific virtual machine during the last 14 days.  ---> C. Azure Activity Log
+
+94) You assign an Azure policy specifying that virtual networks are not an allowed resource type in RG1. VNET1 is "deleted automatically".  --> no change is needed 
+
+95) 
+- azure firewall will encrypt all the network traffic sent from azure to the internet --> no  
+- a NSG will encrypt all network traffic sent from azure to network  --> no 
+- Azure VM that run windows server 2016 can encrypt the network trffic from the virtual machines to a host on the internet   --> no  // 트래픽 암호화는 Azure VPN GW, ExpressRoute를 통해 수행 
+
+96) 
+- Your company has an Azure environment that contains resources in several regions.
+A company policy states that administrators must only be allowed to create additional Azure resources in a region in the country where their office is located. You need to create the Azure resource that must be used to meet the policy requirement. What should you create? ---> B. an Azure policy
+
+97) "Authorization" is the process of verifying a user's credentials.  --> "Authentication"
+
+98) Secures websites from attacks /  Generates reports that contain details of attempted attacks ---> D. DDoS protection
+
+99) 
+- Monitor threats by using sensors  ---> Azure Advanced Threat Protection (ATP)  
+- Enforce azure Multi-Factor Authentication (MFA) based on a condition  ---> Azure AD Identity protection 
+
+100) 
+- From Azure serivce health, an administrator can view the health of all the services deplayed to an azure environment and all the other service available in azure  ---> yes 
+- from azure service health, an administrator can create a rule to be alerted if an azure service fail  --->yes
+- azure service health, an administrator can prevent a service failure from affecting a specific virtual machine ---> no
+
+101) Your company plans to migrate all on-premises data to Azure. You need to identify whether Azure complies with the company's regional requirements. What should you use?  ---> D. the Trust Center
+
+
+102) "Azure Key Vault" is used to store secrets for Azure Active Directory (Azure AD) user accounts.
+---> no change 
+
+103) 
+- authorization to access azure resources can be provided only o azure active directory users  --- no 
+- identities stored in azure ad, 3rd-party cloud service, and on-prem AD can be used to access azure resource -- yes 
+- azure has built-in authentication and authorization service that provided secure access to azure resources -- yes 
+
+104) Your company plans to automate the deployment of servers to Azure.
+Your manager is concerned that you may expose administrative credentials during the deployment.
+You need to recommend an Azure solution that encrypts the administrative credentials during the deployment. ---> A. Azure Key Vault
+
+105) You plan to deploy several Azure virtual machines. You need to control the ports that devices on the Internet can use to access the virtual machines. What should you use? --> NSG
+
+106) You have several virtual machines in an Azure subscription. You create a new subscription. "The virtual machines cannot be moved to the new subscription"  --> B. The virtual machines can be moved to the new subscription
+
+107) You attempt to create several managed Microsoft SQL Server instances in an Azure environment and receive a message that you must increase your Azure subscription limits. What should you do to increase the limit?  --> D. Create a new support request
+
+108) 
+- If your company uses an azure free account, you will only be exposed to a subset of azure service  -- no 
+- all azure free account after a specific period  -- yes 
+- you can create up to 10 azure free account by using the same microsft account -- no 
+
+109) 
+- each azure subscription can contain multiple account administrators -- yes , 1 account admin, 1 service acmin, 200 co-admin 
+- each azure subscription can be managed by using MS account only -- yes  
+- an azure resource group contains multiple azure subscription --no 
+
+110) Your company has 10 offices. You plan to generate several billing reports from the Azure portal. Each report will contain the Azure resource utilization of each office. Which Azure Resource Manager feature should you use before you generate the reports?  -- tags 
+
+111) 
+- in azure AD preminum, at least 99.9 % availability is guarented  -- yes 
+- the SLA for azure AD basic is the same as SLA for Azure AD free -- no
+- all paying azure customer can claim a credit if their montly uptime percentage is below the guaranteed acmount in the SLA -- yes  
+
+112) You deploy an Azure resource. The resource becomes unavailable for an extended period due to a service outage. Microsoft will "automatically refund your bank account." ---> C. automatically credit your account
+
+113) 
+- all azure service in private preview must be accssed by using separate azure portal -- no  
+- azure service in public preview can be used in production env -- yes   // 사용할 수 있다 SLA 가 없을 뿐
+- azure service in public preview are subject to a SLA -- no  // preview 들은 SLA가 없다 
+
+114) 
+A standard support plan is includ in an azure free account  -- no  
+A premier support plan can only be purchased by compnies that have an enterprise aggrement  -- yes  
+support from MSDN forum is only provided to compnies that have a pay-as-you-go subscription -- no 
+
+115) You need to recommend an Azure deployment that provides the ability to segment Azure for the departments. The solution must minimize administrative effort. -- mutiple subscription  
+
+116) Your company has an Azure subscription that contains the following unused resources:
+✑ 20 user accounts in Azure Active Directory (Azure AD)
+✑ Five groups in Azure AD
+✑ 10 public IP addresses
+✑ 10 network interfaces
+You need to reduce the Azure costs for the company. Solution: You remove the unused network interfaces. --> no // network I/F 과금되지 않음 , virtual network gateway 를 삭제해야
+
+117) 문제 상동 
+Solution: You remove the unused public IP addresses. --> yes 
+
+118) 문제 상동 
+Solution: You remove the unused user accounts. --> no 
+
+125) 문제 상동 
+Solution: You remove the unused groups. --> no 
+
+
+119) How should you calculate the monthly uptime percentage?
+(Maximum Available Minutes  - Downtime in Minutes ) + Maximum Available Minutes * 100 
+
+120) 
+- by creating additional resource groups in an azure subscription, additional costs are incurred  -- no 
+- by copying several gigabits of data to azure from on-prem network over vpn, additional data transfer costs are incurred -- no 
+- by copying several GB of data from arue to on-prem network over a VPN, additional data transfer costs are incurred  -- yes 
+
+121) A support plan solution that gives you best practice information, health status and notifications, and 24/7 access to billing information at the lowest possible cost is a "Standard" support plan. --> "Basic"  //https://azure.microsoft.com/en-us/support/plans/
+
+122) You plan to deploy several Azure virtual machines. You need to ensure that the services running on the virtual machines are available if a single data center fails.
+Solution: You deploy the virtual machines to two or more resource groups --> no 
+
+123) In which Azure support plans can you open a new support request? --> C. Premier, Professional Direct, Standard, and Developer only
+
+124) You can create an Azure support request from "support.microsoft.com" --> B. the Azure portal
+https://docs.microsoft.com/en-us/azure/azure-supportability/how-to-create-azure-support-request
+
+125) 위에 있음 
+
+126) What is guaranteed in an Azure Service Level Agreement (SLA)? --> B. feature availability
+
+127) An Azure service is available to all Azure customers when it is in "public preview".  -- no change 
+
+128) The company's support policy states that the Azure environment must provide an option to access support engineers by phone or email.  Solution: Recommend a Basic support plan.  -- no 
+ 
+129) 문제 상동 .. Solution: Recommend a Standard support plan. -- yes  
+
+130) 문제 상동 .. Solution: Recommend a Premier support plan. -- yes // 더 상위 support면 ok인듯 
+
+135) 문제 상동 .. Solution: Recommend a Professional Direct support plan. -- yes 
+
+131) Your company plans to request an architectural review of an Azure environment from Microsoft.
+. The company currently has a Basic support plan. You need to recommend a new support plan for the company. The solution must minimize costs. -- Premier 
+
+132) 
+- Most azure service are introduced in private preview before being introduced in public preview, and then in GA -- yes 
+- azure services in public preview can be managed only by using azure cli -- no 
+- the cost an azure service in private preview decreses when service becomes generally available  - no , free 
+
+133) What is required to use Azure Cost Management?  -- Enterprise Aggrement 
+
+134) Your Azure trial account expired last week. You are now unable to "create additional Azure Active Directory (Azure AD) user accounts" -- C. access your data stored in Azure
+
+135) 위에 
+
+136) Your company has 10 departments. The company plans to implement an Azure environment.
+You need to ensure that each department can use a different payment option for the Azure services it consumes. What should you create for each department?  -- subscription 
+
+https://www.examtopics.com/exams/microsoft/az-900/view/35/
+
 
 
 
