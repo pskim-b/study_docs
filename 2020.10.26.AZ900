@@ -649,10 +649,54 @@ https://k21academy.com/microsoft-azure/az-900/az-900-microsoft-azure-certificati
 
 44) Azure SQL DataWarehouse의 장점은 "HA"가 된다는 것이다. ----> no change  , 의견이 분분하나 scale 은 뒤로 밀렸음... 
 
+45) 서포트 엔지니어가 Azure CLI를 통한 관리작업을 수행할 예정이다. 너는 컴퓨터에 CLI를 설치했다. 너는 CLI를 수행할 도구를 서포트 엔지니어에게 이야기 해야 한다. 어떤 도구를 사용하라고 이야기 할 수 있는가?? --> windows powershell , command prompt 
+
+46) Azure Cloud shell을 통해서 애져를 관리하려고 한다. 어떤 포탈 아이콘이 선택되어져야 하는가? 다음 영역에서 올바른 아이콘을 클릭하라 --> >_ 
+
+47) 20TB 데이터를 애져에 저장하려고 한다. 데이터는 빈번하지 않게 접근될 것이고 MS power BI를 통해 시각화 될 것이다. 어떤 스토리지를 사용할 것인가? --> Azure SQL DataWarehouse , Azure Data Lake 
+
+48) 너는 애져 환경에서 10개의 웹앱을 가지고 있다. 어떤 url이 모든 애져 리소스를 관리하기 위한 것인가??? ---> portal.azure.com 
+
+49) 너는 Azure 서비스에 대한 접근 보호를 위해 Azure 가용영역을 사용할 수 있는 오류 유형을 식별해야 한다 ----> Azure data center failure 
+
+50) 너는 회사의 네트워크를 애져로 확장하려는 계획이 있다. 네트워크는 VPN 어플라이언스를 포함하는데 IP가 131.107.200.1 이다. 너는 애져 리소스를 만들어 VPN 어플라이언스를 식별하고자 한다. 어떤 애져 서비스가 생성되어야 하는가? ----> Local network gateway , Virtual Network Gateway 는 local vpn의 IP를 아는 것은 아니다. Local network gateway 에 연결 후 virtual network gateway로 연결해야 할듯.. 
+
+51) VM1이라는 이름의 VM은 Win2016이다. VM1은 미국 동부리젼이 있다. VM1의 가용성에 영향을 주는 실패 알람을 azure portal 에서 보기위한 서비스는 무엇인가?? ---> Azure Monitor 
+
+52) 애져 관리자가 애져 리소스 생성을 위해 powershell 스크립트를 수행할 예정이다. Azure CLI 도구가 설치된 linux 기반 컴퓨터를 사용해서 해당 작업을 수행할 수 있는가? ---> yes , 과거에는 no 였던거 같은데..  새로운 버전 나오면서 되는듯.. https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-cli?view=azure-devops
+
+53) 애저 관리자가 애져 리소스 생성을 위해 pwershell 스크립트를 수행할 예정이다. Azure CLI 도구가 설치된 chrome OS 기반 컴퓨터를 사용해서 해당 작업을 수행할 수 있는가?  ---> no 
+
+54) 애저 관리자가 애져 리소스 생성을 위해 pwershell 스크립트를 수행할 예정이다. Azure CLI 도구가 설치된 macOS 기반 + PowerShell Core 6.0이 설치된 컴퓨터를 사용해서 해당 작업을 수행할 수 있는가? ---> yes , pwershell core 가 같이 언급되면 OK 
+
+55) 너는 10개의 virtual network과 100개의 VM을 가진 애져 환경을 가지고 있다. Azure virtual network로 들어오는 인바운드 트래픽 양을 제어하고 싶다. 어떤 것을 만드렁야 하는가? ---> one azure filewall , azure firewall은 트래픽량을 제어할 수 있다. 
+
+56) 너는 Azure 서브스크립션 가용영역에 영향을 줄 수 있는 계획된 유지관리 이벤트 목록을 확인해야 한다. 애져에서 어떤 블레이드를 사용해야 하는가? ---> Explanation
+
+57) 
+- An integrated solution for the deployment of code - Azure DevOps
+- A tool that provides guidance and recommendation to improve an Azure environment - Azure Advisor
+- A simplified tool to build intelligent Artificial Intelligence (AI) applications - Azure Cognitive services , AI 개발자를 위한 API를 제공 
+- Monitors web applications - Azure Application Insights , 프론트엔드/백엔드에 대해서 모니터링 하고 외부 도구를 통해 앱 성능 관리 서비스 ,개발자 및 데브옵스 전문가를 위함 
+
+58) 
+- 여러개의 애져 vm을 가지고 있는 애져 환경이 있다. 그리고 온프라미스 nw의 클라이언트 들이 애져 vm이 통신하는 솔루션을 구성해야 한다. 어떤 리소스가 필요한가? ---> virtual network, gateway subnet // https://docs.microsoft.com/en-us/office365/enterprise/connect-an-on-premises-network-to-a-microsoft-azure-virtual-network
+
+59) 
+- A managed relational cloud database service - SQL database 
+- A cloud-based service that leverages MPP to quickly run complex queries across petabyte of data in a relational database - SQL datawarehouse , 정형화 되어 있음 
+- Can run massively parallel data transformation and processing programs across peta byte of data - Data Lake Analytics , 정형화 되어 있지 않음 
+- A OOS f/w for distributed process and analysis of big data set in clusters - HDInsight 
+
+60) 
+- Monitor the health of azure service -> monitor 
+- Browse available virtual machine image -> market place 
+- view security recommendation -> Advisor 
 
 
-	
-https://www.examtopics.com/exams/microsoft/az-900/view/12
+https://www.examtopics.com/exams/microsoft/az-900/view/16/
+
+
 
 
 
